@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CascadeCore", "CascadeCore\CascadeCore.csproj", "{2F29C81C-2E44-4B88-A417-26C1EED33FD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F29C81C-2E44-4B88-A417-26C1EED33FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F29C81C-2E44-4B88-A417-26C1EED33FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F29C81C-2E44-4B88-A417-26C1EED33FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F29C81C-2E44-4B88-A417-26C1EED33FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20DBB394-5E41-47DC-9777-EAFD983EF2E8}
+	EndGlobalSection
+EndGlobal

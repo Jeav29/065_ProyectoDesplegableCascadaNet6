@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-sm-3">
+        <label class="form-label">Departamento</label>
+        <select class="form-select form-select-sm" id="cbodepartamento"></select>
+    </div>
+    <div class="col-sm-3">
+        <label class="form-label">Provincia</label>
+        <select class="form-select form-select-sm" id="cboprovincia"></select>
+    </div>
+    <div class="col-sm-3">
+        <label class="form-label">Distrito</label>
+        <select class="form-select form-select-sm" id="cbodistrito"></select>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function(){
+            
+           
+            obtenerDepartamentos();
+            obtenerProvincias();
+            obtenerDistritos();
+        })
+
+        function obtenerDepartamentos(){
+        
+             $.ajax({
+                url:"@Url.Action("obtenerUbigeo","Home")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    obtener: "departamento",
+                    b_departamento:"",
+                    b_provincia: ""
+                },
+                success: function(response) {
+
+                   //console.log(response)
+
+                   $("#cbodepartamento").append(
+                        $("<option>").attr({"value":""}).text("Seleccionar")
+                   )
+
+                   $.each(response,function(index,elemento){
+                        
+                       $("#cbodepartamento").append(
+                            $("<option>").attr({"value":elemento.departamento}).text(elemento.departamento)
+                       )
+
+                   })
+
+                   $("#cbodepartamento").select2({ placeholder: "Seleccionar", width:"100%"});
+
+                }
+             })
+
+        }
+
+        function obtenerProvincias(){
+            var _departamento = $("#cbodepartamento option:selected").val()
+            
+            $.ajax({
+                url:"@Url.Action("obtenerUbigeo","Home")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    obtener: "provincia",
+                    b_departamento:_departamento,
+                    b_provincia: ""
+                },
+                success: function(response) {
+
+                   $("#cboprovincia").empty();
+                   $("#cboprovincia").append(
+                        $("<option>").attr({"value":""}).text("Seleccionar")
+                   )
+
+                   $.each(response,function(index,elemento){
+                        
+                       $("#cboprovincia").append(
+                            $("<option>").attr({"value":elemento.provincia}).text(elemento.provincia)
+                       )
+
+                   })
+
+                   $("#cboprovincia").select2({ placeholder: "Seleccionar", width:"100%"});
+
+                }
+             })
+
+        }
+
+        $("#cbodepartamento").on("change",function(){
+            obtenerProvincias();
+            $('#cboprovincia').trigger('change')
+        })
+
+        function obtenerDistritos(){
+            var _departamento = $("#cbodepartamento option:selected").val()
+            var _provincia = $("#cboprovincia option:selected").val()
+            
+            $.ajax({
+                url:"@Url.Action("obtenerUbigeo","Home")",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    obtener: "distrito",
+                    b_departamento:_departamento,
+                    b_provincia: _provincia
+                },
+                success: function(response) {
+
+                   $("#cbodistrito").empty();
+                   $("#cbodistrito").append(
+                        $("<option>").attr({"value":""}).text("Seleccionar")
+                   )
+
+                   $.each(response,function(index,elemento){
+                        
+                       $("#cbodistrito").append(
+                            $("<option>").attr({"value":elemento.idUbigeo}).text(elemento.distrito)
+                       )
+
+                   })
+
+                   $("#cbodistrito").select2({ placeholder: "Seleccionar", width:"100%"});
+
+                }
+             })
+
+        }
+
+          $("#cboprovincia").on("change",function(){
+            obtenerDistritos();
+          })
+
+    </script>
+
+}
